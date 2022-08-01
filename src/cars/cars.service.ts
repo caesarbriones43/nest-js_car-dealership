@@ -57,7 +57,9 @@ export class CarsService {
     let carDB = this.findById(id);
 
     if (updateCarDto.id && updateCarDto.id !== id) {
-      throw new BadRequestException(`Card ${updateCarDto.id} is not a valid inside body.`);
+      throw new BadRequestException(
+        `Card ${updateCarDto.id} is not a valid inside body.`,
+      );
     }
 
     this.cars = this.cars.map((car) => {
@@ -72,5 +74,11 @@ export class CarsService {
       return car;
     });
     return carDB;
+  }
+
+  delete(id: string) {
+    const car = this.findById(id);
+
+    this.cars = this.cars.filter((car) => car.id != id);
   }
 }
